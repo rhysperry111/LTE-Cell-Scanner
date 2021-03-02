@@ -1,6 +1,6 @@
 freq_info directory contains a [website](https://www.spectrummonitoring.com/frequencies.php) that shows cellular frequencies information all over the world.
 
-IQ sample can be captured to a file for LTE-Cell-Scanner/LTE_DL_receiver.m to use. See [get_signal_from_sdr.m](https://github.com/JiaoXianjun/LTE-Cell-Scanner/blob/master/Matlab/get_signal_from_sdr.m) for IQ sample capture command generation.
+IQ sample can be captured to a file for [LTE_DL_receiver.m](https://github.com/JiaoXianjun/LTE-Cell-Scanner/blob/master/Matlab/LTE_DL_receiver.m) to use. See [get_signal_from_sdr.m](https://github.com/JiaoXianjun/LTE-Cell-Scanner/blob/master/Matlab/get_signal_from_sdr.m) for IQ sample capture command generation.
 
 Example:
 
@@ -34,7 +34,7 @@ rx wait
 uhd_rx_cfile -f 1815300000 -r 19200000 -N 1728000 -s -g 100  tmp.bin
 ```
 
-Finally the tmp.bin should be renamed to a formatted file name. Then you feed the file name to [LTE_DL_receiver.m](https://github.com/JiaoXianjun/LTE-Cell-Scanner/blob/master/Matlab/LTE_DL_receiver.m) as an argument. 
+Finally the tmp.bin should be renamed to a formatted file name. Then you feed the file name to LTE_DL_receiver.m as an argument. 
 
 Example: f1815.3_s19.2_bw20_0.08s_hackrf.bin
 
