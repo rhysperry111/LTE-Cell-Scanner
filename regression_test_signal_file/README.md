@@ -1,4 +1,4 @@
-freq_info directory contains a link/website that shows cellular frequencies information all over the world.
+freq_info directory contains a [website](https://www.spectrummonitoring.com/frequencies.php) that shows cellular frequencies information all over the world.
 
 IQ sample can be captured to a file for LTE-Cell-Scanner/LTE_DL_receiver.m to use. See [get_signal_from_sdr.m](https://github.com/JiaoXianjun/LTE-Cell-Scanner/blob/master/Matlab/get_signal_from_sdr.m) for IQ sample capture command generation.
 
