@@ -12,6 +12,7 @@ cmd_n_sample_str = num2str((num_second+num_second_drop)*sampling_rate);
 filename_raw = [sdr_board '_tmp.bin'];
 delete(filename_raw);
 filename = ['f' freq_str '_s' sampling_rate_str '_bw' bandwidth_str '_' num2str(num_second) 's_' sdr_board '.bin'];
+disp(filename);
 
 if strcmpi(sdr_board, 'hackrf')
     format_str = 'int8';
@@ -96,7 +97,6 @@ elseif strcmp(sdr_board, 'usrp')
     s = (a(1:2:end) + 1i.*a(2:2:end))./(2^16);
 end
 
-disp(filename);
 fid = fopen(filename, 'w');
 if fid_raw == -1
     disp(['Create ' filename ' failed!']);

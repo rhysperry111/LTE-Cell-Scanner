@@ -242,8 +242,8 @@ for cell_idx = 1 : length(cell_info)
         
         figure(10);
         a = abs(tfg_comp_radioframe)';
-        subplot(2,1,1); pcolor(a); shading flat; title(title_str); xlabel('OFDM symbol idx'); ylabel('subcarrier idx'); drawnow; %colorbar; 
-        subplot(2,1,2); plot(a); xlabel('subcarrier idx'); ylabel('abs'); legend('diff color diff OFDM symbol'); grid on; drawnow; %title('color -- OFDM symbol');  
+        subplot(2,1,1); pcolor(a); shading flat; title(['RE grid: ' title_str]); xlabel('OFDM symbol idx'); ylabel('subcarrier idx'); drawnow; %colorbar; 
+        subplot(2,1,2); plot(a); xlabel('subcarrier idx'); ylabel('abs'); legend('diff color diff OFDM symbol'); grid on; title('Spectrum of each OFDM symbol'); drawnow; %title('color -- OFDM symbol');  
         savefig([num2str(radioframe_idx) '.fig']);
         clear a;
         
