@@ -1,7 +1,8 @@
 # An enhanced LTE Cell Scanner/tracker
 - Support both FDD and TDD
 - OpenCL accelerated
-- Full Receiver (Matlab script) for 100 RB: from IQ sample to PDSCH output and RRC SIB messages
+- Full Receiver algorithm for LTE 100 RB downlink (Matlab and GNU Octave scripts)
+  - from IQ sample to PDSCH output and RRC SIB messages
 - Support Hackrf, rtlsdr, BladeRF and USRP
 
 (It has gone too far away from the Evrytania/LTE-Cell-Scanner during the period I had less experience. I won't push this ugly work back. :))
