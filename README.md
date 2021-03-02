@@ -1,72 +1,75 @@
-An OpenCL accelerated TDD/FDD LTE Scanner (from rtlsdr/hackRF/bladeRF A/D samples to PDSCH output and RRC SIB messages decoded). By Jiao Xianjun (putaoshu@msn.com). Tech blog: http://sdr-x.github.io
+# An enhanced LTE Cell Scanner/tracker
+- Support both FDD and TDD
+- OpenCL accelerated
+- Full Receiver (Matlab script) for 100 RB: from IQ sample to PDSCH output and RRC SIB messages
+- Support Hackrf, rtlsdr, BladeRF and USRP
 
-------------------------------
-New features, make and Usages
-------------------------------
+(It has gone too far away from the Evrytania/LTE-Cell-Scanner during the period I had less experience. I won't push this ugly work back. :))
 
-**0x01. basic method to build program**
+## Build
+```
+mkdir build
+cd build
+cmake ../                   -- default for rtlsdr and OpenCL ON;   OR
+cmake ../ -DUSE_BLADERF=1   -- build for bladeRF;    OR
+cmake ../ -DUSE_HACKRF=1    -- build for hackRF
+cmake ../ -DUSE_OPENCL=0    -- disable OpenCL (See notes in later chapter)
+make
+```
+## Usage
+- CellSearch
+```
+./src/CellSearch --freq-start 1890000000
+```
+Above tries to search LTE Cell at 1890MHz. Don't know which LTE downlink frequency is in use in your region? Check by the engineering mode of your cell phone or this [website](https://www.spectrummonitoring.com/frequencies.php).
 
-    mkdir build
-    cd build
-    cmake ../                   -- default for rtlsdr and OpenCL ON;   OR
-    cmake ../ -DUSE_BLADERF=1   -- build for bladeRF;    OR
-    cmake ../ -DUSE_HACKRF=1    -- build for hackRF
-    cmake ../ -DUSE_OPENCL=0    -- disable OpenCL (See notes in later chapter)
-    make
-
-CellSearch and LTE-Tracker program will be generated in build/src. Use "--help" when invoke program to see all options.
-
-(You may need some related libraries, such as itpp, fftw, libboost-, Curses, ... etc.) For most Ubuntu users, the following should be enough to get the necessary libraries installed:
-
-    sudo apt install cmake libitpp-dev librtlsdr-dev libopenblas-dev libncurses5-dev
-
-**0x02. basic usage (If you have OpenCL, make sure those .cl files in LTE-Cell-Scanner/src have been copy to program directory)**
-            
-*0x02.1* CellSearch --freq-start 1890000000   (try to search LTE Cell at 1890MHz)
-
-    output:
-    ...
-    Detected a TDD cell! At freqeuncy 1890MHz, try 0
-    cell ID: 253
-    PSS ID: 1
-    RX power level: -17.0064 dB
-    residual frequency offset: -48.0366 Hz
-                k_factor: 1
-    ...
-    Detected the following cells:
-    Meaning -- DPX:TDD/FDD; A: #antenna ports C: CP type ; P: PHICH duration ; PR: PHICH resource type
-    DPX  CID  A     fc  freq-offset RXPWR  C   nRB  P   PR  CrystalCorrectionFactor
-    TDD  253  2  1890M         -48h   -17  N  100   N  1/2   0.99999997458380551763
-    
-*0x02.2* LTE-Tracker -f 1890000000  (try to track LTE Cell at 1890MHz)
-
-*0x02.3* LTE_DL_receiver (Matlab script. Decode RRC SIB message in PDSCH by reading captured signal bin file)
-
-*0x02.4* LTE_DL_receiver 1890 40 40 (Matlab script. Decode SIB at 1890MHz lively with LNA VGA gain of hackRF 40dB 40dB)
-
-    output:
-    ...
-    TDD SFN-864 ULDL-2-|D|S|U|D|D|D|S|U|D|D| CID-216 nPort-2 CP-normal PHICH-DUR-normal-RES-1
-    SF0 PHICH1 PDCCH1 RNTI: 
-    ...
-    SF4 PHICH1 PDCCH1 RNTI: SI-RNTI SI-RNTI 
-    PDCCH   No.0  4CCE: Localized VRB from RB0 to RB11 MCS-7 HARQ-0 NEWind-0 RV-0 TPC-1 DAI-0
-    Calling asn1c decoder (../asn1_test/LTE-BCCH-DL-SCH-decode/progname) for BCCH-DL-SCH-Message.
-    ../asn1_test/LTE-BCCH-DL-SCH-decode/progname tmp_sib_info.per -p BCCH-DL-SCH-Message
-    <BCCH-DL-SCH-Message>
-        <message>
-            <c1>
-                <systemInformation>
-                    <criticalExtensions>
-                        <systemInformation-r8>
-                            <sib-TypeAndInfo>
-                                    <sib2>
-                                        <radioResourceConfigCommon>
-                                            <rach-ConfigCommon>
-                                                <preambleInfo>
-                                                    <numberOfRA-Preambles><n52/></numberOfRA-Preambles>
-    ...
-
+Example output:
+```
+...
+Detected a TDD cell! At freqeuncy 1890MHz, try 0
+cell ID: 253
+PSS ID: 1
+RX power level: -17.0064 dB
+residual frequency offset: -48.0366 Hz
+            k_factor: 1
+...
+Detected the following cells:
+Meaning -- DPX:TDD/FDD; A: #antenna ports C: CP type ; P: PHICH duration ; PR: PHICH resource type
+DPX  CID  A     fc  freq-offset RXPWR  C   nRB  P   PR  CrystalCorrectionFactor
+TDD  253  2  1890M         -48h   -17  N  100   N  1/2   0.99999997458380551763
+```
+- LTE-Tracker
+```
+./src/LTE-Tracker -f 1890000000
+```
+- LTE-Cell-Scanner/Matlab
+```
+LTE_DL_receiver('../regression_test_signal_file/f1815.3_s19.2_bw20_0.08s_hackrf-1.bin');
+```
+Example output:
+```
+...
+TDD SFN-864 ULDL-2-|D|S|U|D|D|D|S|U|D|D| CID-216 nPort-2 CP-normal PHICH-DUR-normal-RES-1
+SF0 PHICH1 PDCCH1 RNTI: 
+...
+SF4 PHICH1 PDCCH1 RNTI: SI-RNTI SI-RNTI 
+PDCCH   No.0  4CCE: Localized VRB from RB0 to RB11 MCS-7 HARQ-0 NEWind-0 RV-0 TPC-1 DAI-0
+Calling asn1c decoder (../asn1_test/LTE-BCCH-DL-SCH-decode/progname) for BCCH-DL-SCH-Message.
+../asn1_test/LTE-BCCH-DL-SCH-decode/progname tmp_sib_info.per -p BCCH-DL-SCH-Message
+<BCCH-DL-SCH-Message>
+    <message>
+        <c1>
+            <systemInformation>
+                <criticalExtensions>
+                    <systemInformation-r8>
+                        <sib-TypeAndInfo>
+                                <sib2>
+                                    <radioResourceConfigCommon>
+                                        <rach-ConfigCommon>
+                                            <preambleInfo>
+                                                <numberOfRA-Preambles><n52/></numberOfRA-Preambles>
+...
+```
 **0x03. Change gain by hand.**
 
 Use "-g X" to set gain value X to hardware. If "-g" is not used, default values are used:
@@ -89,8 +92,6 @@ Without "-t" leads to non-twisted mode (default mode)
 **0x06. "--num-try x" performs x tries of searching at each frequency.**
 
 When signal is weak, only one try may not have you good luck.
-
-**ATTENTION!!! Please use release version instead of dev trunk if you want a 100% workable program.**
 
 ----------------------------------------------------------------------
 Notes
