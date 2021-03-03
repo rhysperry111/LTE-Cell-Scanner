@@ -3,7 +3,7 @@
 - OpenCL accelerated
 - Full Receiver algorithm for LTE 100 RB downlink (Matlab and GNU Octave scripts)
   - from IQ sample to PDSCH output and RRC SIB messages
-- Support Hackrf, rtlsdr, BladeRF and USRP
+- Support HackRF, rtlsdr, BladeRF and USRP
 
 (It has gone too far away from the Evrytania/LTE-Cell-Scanner during the period I had less experience. I won't push this ugly work back. :))
 
@@ -11,11 +11,14 @@
 ```
 mkdir build
 cd build
-cmake ../                   -- default for rtlsdr and OpenCL ON;   OR
-cmake ../ -DUSE_BLADERF=1   -- build for bladeRF;    OR
-cmake ../ -DUSE_HACKRF=1    -- build for hackRF
-cmake ../ -DUSE_OPENCL=0    -- disable OpenCL (See notes in later chapter)
+cmake ../
 make
+```
+By default above builds for rtlsdr. Following arguments could be added at the end of cmake command for different hardwares and options. 
+```
+-DUSE_BLADERF=1   -- build for BladeRF
+-DUSE_HACKRF=1    -- build for HackRF
+-DUSE_OPENCL=0    -- disable OpenCL (See notes in later chapter)
 ```
 ## Usage
 - CellSearch
@@ -43,10 +46,12 @@ TDD  253  2  1890M         -48h   -17  N  100   N  1/2   0.99999997458380551763
 ```
 ./src/LTE-Tracker -f 1890000000
 ```
-- LTE-Cell-Scanner/Matlab
+- LTE_DL_receiver/Matlab
 ```
 LTE_DL_receiver('../regression_test_signal_file/f1815.3_s19.2_bw20_0.08s_hackrf-1.bin');
 ```
+See [regression_test_signal_file](regression_test_signal_file) for how to capture IQ sapmle to a .bin file via HackRF/rtlsdr/BladeRF/USRP. Lots of captured IQ files are in [LTE-Cell-Scanner-big-file](https://github.com/JiaoXianjun/LTE-Cell-Scanner-big-file).
+
 Example output:
 ```
 ...
@@ -71,19 +76,15 @@ Calling asn1c decoder (../asn1_test/LTE-BCCH-DL-SCH-decode/progname) for BCCH-DL
                                                 <numberOfRA-Preambles><n52/></numberOfRA-Preambles>
 ...
 ```
-**0x03. Change gain by hand.**
+## Advanced topics
+For CellSearch/LTE-Tracker, "-h" can always be used to display available arguments.
+### Gain setting
+Use "-g X" to set gain value X to hardware. If "-g" is not used, default gain will be used.
+Gain is important to get good rx performance. If CellSearch reports like "input level: avg abs(real) 0.00594959 avg abs(imag) 0.00614887", where the numbers are far below 1, larger gain value should be considered.
+### carrier-sampling-clock twisted mode
+"-t" forces into original carrier-sampling-clock twisted mode, which assumes carrier frequency offset and sampling frequency offset are from the common LO. This assumption speedups the search algorithm. But it is not valid when you add an independent external mixer/converter to your SDR board.
 
-Use "-g X" to set gain value X to hardware. If "-g" is not used, default values are used:
-
-    rtlsdr default  0 (AGC)
-    hackRF default  40dB (VGA gain, can be adjusted by "-g"), LAN gain is fixed at 40dB
-    bladeRF default 60dB + maximum LNA gain. "-g" can set total gain which will be distributed to LNA VGA1 VGA2 automatically
-
-gain is important to get good rx performance. If CellSearch reports like "input level: avg abs(real) 0.00594959 avg abs(imag) 0.00614887", where the numbers are far below 1, larger gain value should be considered.
-
-**0x04. "-t" forces into original carrier-sampling-clock twisted mode.**
-
-Without "-t" leads to non-twisted mode (default mode)
+Without "-t" leads to non-twisted mode (default mode).
 
 **0x05. Capture to and reload from raw bin file**
 
