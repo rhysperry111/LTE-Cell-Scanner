@@ -1,6 +1,6 @@
 function [ce_tfg, np]=chan_est(peak,tfg,port, nRB)
 
-% add 100RB support. Jiao Xianjun(putaohsu@gmail.com)
+% add 100RB support. Xianjun Jiao (putaohsu@msn.com)
 % Perform channel estimation on a specific antenna port
 
 % Copyright 2012 Evrytania LLC (http://www.evrytania.com)

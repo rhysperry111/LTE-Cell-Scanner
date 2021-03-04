@@ -1,5 +1,5 @@
 # For OpenCL LTE Scanner (https://github.com/JiaoXianjun/LTE-Cell-Scanner)
-# Jiao Xianjun (putaoshu@gmail.com)
+# Xianjun Jiao (putaoshu@msn.com)
 
 # - Find OpenCL
 # Find the native OpenCL includes and library

@@ -1,7 +1,6 @@
-% Jiao Xianjun (putaoshu@gmail.com; putaoshu@msn.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % CellSearch.m
 % Improved LTE-Cell-Scanner (written by James Peroulas: https://github.com/Evrytania/LTE-Cell-Scanner).
-% See also README in root directory, ../test, ../../rtl-sdr-LTE/scan-capture/.
 
 % Some scripts are borrowed from:
 % https://github.com/JiaoXianjun/rtl-sdr-LTE

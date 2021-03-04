@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// Improved by Jiao Xianjun (putaoshu@gmail.com):
+// Improved by Xianjun Jiao (putaoshu@msn.com):
 // 1. TD-LTE support
 // 2. fast pre-search frequencies (external mixer/LNB support)
 // 3. multiple tries at one frequency

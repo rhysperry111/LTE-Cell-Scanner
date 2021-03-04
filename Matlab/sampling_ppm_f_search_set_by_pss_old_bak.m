@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@msn.com; putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % Find out LTE PSS in the signal stream and correct sampling&carrier error.
 % A script of project: https://github.com/JiaoXianjun/rtl-sdr-LTE
 

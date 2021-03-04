@@ -1,9 +1,9 @@
 function [ce_tfg, np]=chan_est_subframe(peak, subframe_idx, tfg, port)
 
-% make this work in manner of subframe by subframe -- Jiao Xianjun
-% (putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
+% make this work in manner of subframe by subframe
 
-% add 100RB support. Jiao Xianjun(putaohsu@gmail.com)
+% add 100RB support
 % Perform channel estimation on a specific antenna port
 
 % Copyright 2012 Evrytania LLC (http://www.evrytania.com)

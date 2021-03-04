@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@msn.com; putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % convert original uint8 data captured by rtl_sdr to double complex data.
 % A script of project: https://github.com/JiaoXianjun/rtl-sdr-LTE
 

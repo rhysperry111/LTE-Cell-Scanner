@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@msn.com; putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % Generate pss time domain sequences under different frequency offsets.
 % A script of project: https://github.com/JiaoXianjun/rtl-sdr-LTE
 

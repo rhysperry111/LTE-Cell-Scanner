@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % lte_receiver.m
 % Some are from updated https://github.com/JiaoXianjun/rtl-sdr-LTE
 clear all; close all;

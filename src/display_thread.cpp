@@ -547,7 +547,7 @@ void display_thread(
       // Header and footer
       {
         stringstream ss;
-        ss << "LTE-Tracker www.evrytania.com; 1.0 to " << MAJOR_VERSION << "." << MINOR_VERSION << "." << PATCH_LEVEL << ": OpenCL/TDD/HACKRF/bladeRF/ext-LNB added by Jiao.(putaoshu@gmail.com).";
+        ss << "LTE-Tracker www.evrytania.com; 1.0 to " << MAJOR_VERSION << "." << MINOR_VERSION << "." << PATCH_LEVEL << ": An enhanced LTE Cell Scanner/tracker. Xianjun Jiao (putaoshu@msn.com).";
         move(0,0);
         attron(COLOR_PAIR(CYAN));
         print_center(ss.str());

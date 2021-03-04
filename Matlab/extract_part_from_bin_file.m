@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@msn.com; putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % Extract part of rtl-sdr captured bin into a new file.
 % A script of project: https://github.com/JiaoXianjun/rtl-sdr-LTE
 

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// Improved by Jiao Xianjun (putaoshu@gmail.com):
+// Improved by Xianjun Jiao (putaoshu@msn.com):
 // 1. TD-LTE support
 // 2. OpenCL to speedup
 // 3. fast pre-search frequencies (external mixer/LNB support)
@@ -84,7 +84,7 @@ uint8 verbosity=1;
 
 // Simple usage screen.
 void print_usage() {
-  cout << "LTE CellSearch (" << BUILD_TYPE << ") help. 1.0 to " << MAJOR_VERSION << "." << MINOR_VERSION << "." << PATCH_LEVEL << ": OpenCL/TDD/HACKRF/bladeRF/ext-LNB added by Jiao Xianjun(putaoshu@gmail.com)" << endl << endl;
+  cout << "LTE CellSearch (" << BUILD_TYPE << ") help. 1.0 to " << MAJOR_VERSION << "." << MINOR_VERSION << "." << PATCH_LEVEL << ": An enhanced LTE Cell Scanner/tracker. Xianjun Jiao (putaoshu@msn.com)" << endl << endl;
   cout << "CellSearch -s start_frequency [optional_parameters]" << endl;
   cout << "  Basic options" << endl;
   cout << "    -h --help" << endl;
@@ -448,7 +448,7 @@ void parse_commandline(
   }
 
   if (verbosity>=1) {
-    cout << "LTE CellSearch (" << BUILD_TYPE << ") beginning. 1.0 to " << MAJOR_VERSION << "." << MINOR_VERSION << "." << PATCH_LEVEL << ": OpenCL/TDD/HACKRF/bladeRF/ext-LNB added by Jiao Xianjun(putaoshu@gmail.com)" << endl;
+    cout << "LTE CellSearch (" << BUILD_TYPE << ") beginning. 1.0 to " << MAJOR_VERSION << "." << MINOR_VERSION << "." << PATCH_LEVEL << ": An enhanced LTE Cell Scanner/tracker. Xianjun Jiao (putaoshu@msn.com)" << endl;
 
 // //    frequency information will be displayed in main() function.
 //    if (freq_start==freq_end) {

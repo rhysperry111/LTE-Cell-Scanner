@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@msn.com)
+% Xianjun Jiao (putaoshu@msn.com)
 function LTE_DL_receiver(varargin)
 % From IQ sample to PDSCH output and RRC SIB messages.
 

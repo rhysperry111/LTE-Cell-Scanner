@@ -1,6 +1,7 @@
 function [tfg, tfg_timestamp, peak_out]=extract_tfg(peak,capbuf,fc,sampling_carrier_twist, nRB)
 
-% add 100RB support. Jiao Xianjun(putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
+% add 100RB support.
 % Convert from time domain to frequency domain and create the time/frequency
 % grid.
 

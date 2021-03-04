@@ -1,6 +1,4 @@
-// An OpenCL accelerated LTE Cell Scanner
-//
-// Written by Jiao Xianjun <putaoshu@gmail.com>
+// Xianjun Jiao <putaoshu@msn.com>
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by

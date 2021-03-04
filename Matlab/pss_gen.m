@@ -1,4 +1,4 @@
-% Jiao Xianjun (putaoshu@msn.com; putaoshu@gmail.com)
+% Xianjun Jiao (putaoshu@msn.com)
 % generate frequency domain PSS and time domain PSS signal
 % A script of project: https://github.com/JiaoXianjun/rtl-sdr-LTE
 
