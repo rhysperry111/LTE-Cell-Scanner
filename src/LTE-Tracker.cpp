@@ -138,7 +138,7 @@ void print_usage() {
   cout << "      number of reserved frequency-ppm peak pairs in pre-search phase (default: 1)" << endl;
   cout << "  Dongle LO correction options:" << endl;
   cout << "    -t --twisted" << endl;
-  cout << "      enable original sampling-carrier-twisted mode (default is disable and using carrier&sampling isolated pre-search to support external mixer/LNB)" << endl;
+  cout << "      disable sampling-carrier-twisted mode to support external mixer/LNB (default is enable and using carrier&sampling twisted fast search )" << endl;
   cout << "    -p --ppm ppm" << endl;
   cout << "      crystal remaining PPM error" << endl;
   cout << "    -c --correction c" << endl;
@@ -211,7 +211,7 @@ void parse_commandline(
 ) {
   // Default values
   fc=-1;
-  sampling_carrier_twist=false;
+  sampling_carrier_twist=true;
   ppm=120;
   correction=1;
   device_index=-1;
@@ -298,7 +298,7 @@ void parse_commandline(
         }
         break;
       case 't':
-        sampling_carrier_twist=true;
+        sampling_carrier_twist=false;
         break;
       case 'p':
         ppm=strtod(optarg,&endp);

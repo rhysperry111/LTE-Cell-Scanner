@@ -118,7 +118,7 @@ void print_usage() {
   cout << "      enable offset tuning for E4000 based devices" << endl;
   cout << "  Dongle LO correction options:" << endl;
   cout << "    -t --twisted" << endl;
-  cout << "      enable original sampling-carrier-twisted mode (default is disable and using carrier&sampling isolated pre-search to support external mixer/LNB)" << endl;
+  cout << "      disable sampling-carrier-twisted mode to support external mixer/LNB (default is enable and using carrier&sampling twisted fast search)" << endl;
   cout << "    -p --ppm ppm" << endl;
   cout << "      crystal remaining PPM error" << endl;
   cout << "    -c --correction c" << endl;
@@ -184,7 +184,7 @@ void parse_commandline(
   freq_start=-1;
   freq_end=-1;
   num_try=1; // default number
-  sampling_carrier_twist=false;
+  sampling_carrier_twist=true;
   ppm=0;
   correction=1;
   save_cap=false;
@@ -276,7 +276,7 @@ void parse_commandline(
         }
         break;
       case 't':
-        sampling_carrier_twist=true;
+        sampling_carrier_twist=false;
         break;
       case 'p':
         ppm=strtod(optarg,&endp);

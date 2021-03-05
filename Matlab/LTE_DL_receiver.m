@@ -14,7 +14,7 @@ function LTE_DL_receiver(varargin)
 close all;
 warning('off','all');
 
-sampling_carrier_twist = 0; % ATTENTION! If this is 1, make sure fc is aligned with bin file!!!
+sampling_carrier_twist = 1; % ATTENTION! If this is 1, make sure fc is aligned with bin file!!!
 num_radioframe = 8; % Each radio frame length 10ms. MIB period is 4 radio frame
 num_second = num_radioframe*10e-3;
 raw_sampling_rate = 19.2e6; % Constrained by hackrf board and LTE signal format (100RB). Rtlsdr uses 1.92e6 due to hardware limitation
