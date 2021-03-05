@@ -99,7 +99,7 @@ Searche LTE cell in a.bin
 ### OpenCL
 OpenCL drivers of different vendors move a lot during years. This part might be obsolete.
 
-Install the OpenCL Driver in your system (Check Intel/AMD/Nvidia website), and make sure cmake (cmake/Modules/FindOPENCL.cmake) could find them. Otherwise the OpenCL speedup won't take effect.
+Install the OpenCL Driver in your system (check Intel/AMD/Nvidia website), and make sure cmake (cmake/Modules/FindOPENCL.cmake) could find them. Otherwise the OpenCL speedup won't take effect.
 
 Before run, kernel files (src/*.cl) should be put IN THE SAME DIRECTORY AS executable program (CellSearch/LTE-Tracker) or in $PATH.
 Because they need to be compiled and executed by OpenCL runtime after program launch.
@@ -113,10 +113,8 @@ When program runs, it tells you how many platforms are detected in total. Defaul
 
 Number of workitems for 6RB channel filter kernel can be specified by "--filter-workitem". Default value is 32.
 
-Number of workitems in the 1st NDrange dimension for PSS frequency-time correlation kernel can be specified by "--xcorr-workitem".
-(ATTENTION!!! Now it is omitted because #define FILTER_MCHN_SIMPLE_KERNEL in searcher.h. Turn the pre-define off to use "--xcorr-workitem")
-Default value is 2. Number of workitems of PSS correlation'2nd-NDrange-dimension depends on PPM range (use "-p" to change it).
+Number of workitems in the 1st NDrange dimension for PSS frequency-time correlation kernel can be specified by "--xcorr-workitem" (Now it is omitted because #define FILTER_MCHN_SIMPLE_KERNEL in searcher.h). Turn the pre-define off to use "--xcorr-workitem". Default value is 2. Number of workitems of PSS correlation'2nd-NDrange-dimension depends on PPM range (use "-p" to change it).
 
-Optimal number of workitems is platform-device dependent. Optimal values should be found according to your computer configuration.
+Optimal number of workitems is platform-device dependent. Optimal values should be decided according to your computer configuration.
 
-If you got -4(CL_MEM_OBJECT_ALLOCATION_FAILURE) or -5(CL_OUT_OF_RESOURCES) error in some OpenCL platform-device, try smaller PPM value to narrow frequency offset range. Because less range less OpenCL work-items needed.
+If you got -4(CL_MEM_OBJECT_ALLOCATION_FAILURE) or -5(CL_OUT_OF_RESOURCES) error on some OpenCL platform-device, try smaller PPM value to narrow frequency offset range. Because less range less OpenCL work-items needed.
