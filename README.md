@@ -82,40 +82,32 @@ For CellSearch/LTE-Tracker, "-h" can always be used to display available argumen
 Use "-g X" to set gain value X to hardware. If "-g" is not used, default gain will be used.
 Gain is important to get good rx performance. If CellSearch reports like "input level: avg abs(real) 0.00594959 avg abs(imag) 0.00614887", where the numbers are far below 1, larger gain value should be considered.
 ### carrier-sampling-clock twisted mode
-"-t" forces into original carrier-sampling-clock twisted mode, which assumes carrier frequency offset and sampling frequency offset are from the common LO. This assumption speedups the search algorithm. But it is not valid when you add an independent external mixer/converter to your SDR board.
+"-t" disables the carrier-sampling-clock twisted mode. "-t" should be used when external mixer/converter is connected to your SDR board and their LOs are independent. Due to the independent searching over carrier frequency offset and sampling rate offset, the over all searching time is longer.
+### Capture to and reload from file
+Example:
+```
+./src/CellSearch --freq-start 1860e6 --recbin a.bin
+```
+Save signal in a.bin while doing cell search at frequency 1.86GHz.
+```
+./src/CellSearch --loadbin a.bin
+```
+Searche LTE cell in a.bin
+### Multiple tries at a frequency
+"--num-try X" performs X tries of searching at every frequencies. When signal is weak, only one try may not have you good luck.
 
-Without "-t" leads to non-twisted mode (default mode).
+### OpenCL
+OpenCL drivers of different vendors move a lot during years. This part might be obsolete.
 
-**0x05. Capture to and reload from raw bin file**
+Install the OpenCL Driver in your system (Check Intel/AMD/Nvidia website), and make sure cmake (cmake/Modules/FindOPENCL.cmake) could find them. Otherwise the OpenCL speedup won't take effect.
 
-    "CellSearch --freq-start 1860e6 --recbin a.bin" saves signal in a.bin while doing cell search at frequency 1.86GHz
-    "CellSearch --loadbin test/f1890_s1.92_g0_0.16s.bin" searches LTE cell in test/f1890_s1.92_g0_0.16s.bin
-
-**0x06. "--num-try x" performs x tries of searching at each frequency.**
-
-When signal is weak, only one try may not have you good luck.
-
-----------------------------------------------------------------------
-Notes
-----------------------------------------------------------------------
-
-**0x01. About carrier-sampling-clock twisted and non-twisted mode.**
-
-Default mode supports external LNB and fast pre-search.
-See detailed explanation in https://github.com/JiaoXianjun/rtl-sdr-LTE , and videos: (inside China): http://v.youku.com/v_show/id_XNjc1MjIzMDEy.html ,
- (outside China): http://www.youtube.com/watch?v=4zRLgxzn4Pc )
-
-**0x02. About OpenCL.**
-
-**0x02.1** Make sure OpenCL SDK (Intel, AMD, Nvidia) has been installed in your system correctly, if you want LTE Scanner accelerated by OpenCL.
-
-**0x02.2 IMPORTANT!** Before run, those kernel files (src/*.cl) should be put IN THE SAME DIRECTORY AS executable program or in $PATH.
+Before run, kernel files (src/*.cl) should be put IN THE SAME DIRECTORY AS executable program (CellSearch/LTE-Tracker) or in $PATH.
 Because they need to be compiled and executed by OpenCL runtime after program launch.
 
-**0x02.3 Test an OpenCL example:**
-
-    CellSearch --loadbin test/f1890_s1.92_g0_0.16s.bin --opencl-platform=0 --opencl-device=0 --filter-workitem=32 --xcorr-workitem=2
-
+OpenCL example:
+```
+CellSearch --loadbin test/f1890_s1.92_g0_0.16s.bin --opencl-platform=0 --opencl-device=0 --filter-workitem=32 --xcorr-workitem=2
+```
 OpenCL platform and device are specified by "--opencl-platform=idx1 --opencl-device=idx2" to decide which CPU/GPU is used.
 When program runs, it tells you how many platforms are detected in total. Default index is 0.
 
@@ -127,96 +119,4 @@ Default value is 2. Number of workitems of PSS correlation'2nd-NDrange-dimension
 
 Optimal number of workitems is platform-device dependent. Optimal values should be found according to your computer configuration.
 
-**0x02.4 ATTENTION!!!** If you got -4(CL_MEM_OBJECT_ALLOCATION_FAILURE) or -5(CL_OUT_OF_RESOURCES) error in some OpenCL platform-device, try smaller PPM value to narrow frequency offset range. Because less range less OpenCL work-items needed.
-
---------------------
-News:
---------------------
-
-2014-10: support bladeRF now.
-
-2014-07: Now Matlab can parse SIB automatically by calling asn1c. See doc in asn1_test and http://sdr-x.github.io/LTE-SIB-decoding-by-asn1c/ . (Don't forget compling the progname in your own computer!)
-
-2014-06: SIB message (output by LTE_DL_receiver.m) is decoded successfully! See Matlab/*SIB.txt.
-
-2014-05: 20MHz LTE PDCCH DCI format1A for SI-RNTI has been detected successfully from HACKRF captured signal, and corresponding SIB PDSCH constellation is shown. Run: Matlab/LTE_DL_receiver.m
- (http://youtu.be/2JH_EGdHyYE  http://v.youku.com/v_show/id_XNzE3NDYwMDgw.html)
-
------------------------------
-Bakcups
-------------------------------
-
-Before explore this LTE Scanner, it's better for you to do some homeworks: (my blog: http://sdr-x.github.io/ if you have time)
-
-1. Original FDD only LTE Cell Scanner / Tracker: https://github.com/Evrytania/LTE-Cell-Scanner , by James Peroulas.
-
-2. rtl-sdr ultra cheap USB TV dongle: http://sdr.osmocom.org/trac/wiki/rtl-sdr
-
-3. hackrf board: http://greatscottgadgets.com/hackrf/ , https://github.com/mossmann/hackrf
-
-4. bladeRF board: http://www.nuand.com/  ,  https://github.com/Nuand/bladeRF
-
-COMPATIBLE rtl-sdr and hackrf version (maybe not valid now. If you have issues, try these rev.):
-
-librtlsdr (https://github.com/steve-m/librtlsdr) release v0.5.2 (Not v0.5.3 at least for my computer)
-
-libhackrf (https://github.com/mossmann/hackrf  ) revision around 2014 April 1st.
-
-See TODO if you want to contribute. Any questions or interests, feel free to contact me. putaoshu@gmail.com
-
-Introduction video: (inside China) http://v.youku.com/v_show/id_XNjk3Mjc1MTUy.html ,
-(outside China) http://www.youtube.com/watch?v=3hnlrYtjI-4
-
-Introduction video before: (inside China) http://pan.baidu.com/s/1o6qbLGY ,
-(outside China) http://www.youtube.com/watch?v=SxZzEVEKuRs
-
-Introduction video before: (inside China) http://v.youku.com/v_show/id_XNjc1MjIzMDEy.html ,
-(outside China) http://www.youtube.com/watch?v=4zRLgxzn4Pc
-
---------------------------------------------------------------------------
-Original Readme of James Peroulas's LTE Cell Scanner / Tracker
---------------------------------------------------------------------------
-LTE Cell Scanner / Tracker
---------------------------
-
-This is a collection of tools to locate and track LTE basestation cells using
-very low performance RF front ends. For example, these tools work with RTL2832
-based dongles (E4000, R820T, etc.) which have a noise figure of 20dB, only 8
-bits in the A/D, and a crystal with a frequency error of about 100 ppm.
-
-The 'CellSearch' program can be used to search for LTE carriers within a range
-of frequencies.  Once an LTE frequency has been located, 'LTE-Tracker' can be
-used to monitor and track, in realtime, any LTE cells on that frequency.
-
-The main documentation in html format can be found on the web at:
-  http://www.evrytania.com/lte-tools
-And in the doc/index.html subdirectory of this distribution.
-
-For questions, comments, or bug reports, contact James Peroulas
-james@evrytania.com, or check the bugtracker on github:
-  https://github.com/Evrytania/LTE-Cell-Scanner/issues
-
-------
-Quick build instructions:
-------
-  cd LTE-Cell-Scanner
-  mkdir build
-  cd build
-  cmake ..
-  make
-
-------
-Install:
-------
-  sudo make install
-
-------
-Quick usage instructions:
-------
-
-Search for LTE carriers within a common LTE frequency range used in the US:
-  CellSearch --freq-start 715e6 --freq-end 768e6
-
-Start tracking LTE cells on frequency 739 MHz:
-  LTE-Tracker -f 739000000
-
+If you got -4(CL_MEM_OBJECT_ALLOCATION_FAILURE) or -5(CL_OUT_OF_RESOURCES) error in some OpenCL platform-device, try smaller PPM value to narrow frequency offset range. Because less range less OpenCL work-items needed.
