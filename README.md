@@ -1,4 +1,5 @@
 # An enhanced LTE Cell Scanner/tracker
+![alt text](matlab_result_example.jpg)
 - Support both FDD and TDD
 - OpenCL accelerated
 - Full Receiver algorithm for LTE 100 RB downlink (Matlab and GNU Octave scripts)
