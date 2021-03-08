@@ -47,7 +47,13 @@ TDD  253  2  1890M         -48h   -17  N  100   N  1/2   0.99999997458380551763
 ```
 ./src/LTE-Tracker -f 1890000000
 ```
-- LTE_DL_receiver/Matlab
+- LTE_DL_receiver (In Matlab or Octave)
+
+With SDR hardware (Input frequency in MHz. For example 1815.3MHz):
+```
+LTE_DL_receiver(1815.3);
+```
+With pre-captured file:
 ```
 LTE_DL_receiver('../regression_test_signal_file/f1815.3_s19.2_bw20_0.08s_hackrf-1.bin');
 ```
