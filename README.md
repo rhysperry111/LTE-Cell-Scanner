@@ -57,6 +57,8 @@ With pre-captured file:
 ```
 LTE_DL_receiver('../regression_test_signal_file/f1815.3_s19.2_bw20_0.08s_hackrf-1.bin');
 ```
+Please check the beginning text in LTE_DL_receiver.m to see explanation on input arguments.
+
 See [regression_test_signal_file](regression_test_signal_file) for how to capture IQ sapmle to a .bin file via HackRF/rtlsdr/BladeRF/USRP. Lots of captured IQ files are in [LTE-Cell-Scanner-big-file](https://github.com/JiaoXianjun/LTE-Cell-Scanner-big-file).
 
 Example output:
