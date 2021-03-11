@@ -1113,11 +1113,13 @@ double kalibrate(
   cmat pss_fo_set;// pre-generate frequencies offseted pss time domain sequence
   vec f_search_set;
   if (sampling_carrier_twist) { // original mode
-    const uint16 n_extra=floor_i((fc_search_set(0)*ppm/1e6+2.5e3)/5e3);
+    uint16 n_extra=floor_i((fc_search_set(0)*ppm/1e6+2.5e3)/5e3);
+    n_extra = (n_extra==0?1:n_extra); // avoid crash of matlab_range
     f_search_set=to_vec(itpp_ext::matlab_range( -n_extra*5000,5000, (n_extra-1)*5000));
   } else {
     if (length(fc_search_set)==1) {//when only one frequency is specified, whole PPM range should be covered
-      const uint16 n_extra=floor_i((fc_search_set(0)*ppm/1e6+2.5e3)/5e3);
+      uint16 n_extra=floor_i((fc_search_set(0)*ppm/1e6+2.5e3)/5e3);
+      n_extra = (n_extra==0?1:n_extra); // avoid crash of matlab_range
       f_search_set=to_vec(itpp_ext::matlab_range( -n_extra*5000,5000, (n_extra-1)*5000));
     } else {
       // since we have frequency step is 100e3, why not have sub search set limited by this regardless PPM?

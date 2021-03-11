@@ -1079,6 +1079,8 @@ int main(
     else
       n_extra=28;
 
+    // cout << "n_extra: " << n_extra << endl;
+    n_extra = (n_extra==0?1:n_extra); // avoid crash of matlab_range
     f_search_set=to_vec(itpp_ext::matlab_range( -n_extra*5000,5000, (n_extra-1)*5000));
     // for graphic card which has limited mem, you should turn num_loop on if OpenCL reports -4: CL_MEM_OBJECT_ALLOCATION_FAILURE
 //    if (num_loop == 0) // it is not so useful
@@ -1091,6 +1093,7 @@ int main(
       else
         n_extra=28; //-140kHz to 135kHz
 
+      n_extra = (n_extra==0?1:n_extra); // avoid crash of matlab_range
       f_search_set=to_vec(itpp_ext::matlab_range( -n_extra*5000,5000, (n_extra-1)*5000));
     } else {
       // since we have frequency step is 100e3, why not have sub search set limited by this regardless PPM?
