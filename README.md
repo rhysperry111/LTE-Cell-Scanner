@@ -6,7 +6,7 @@
   - from IQ sample to PDSCH output and RRC SIB messages
 - Support HackRF, rtlsdr, BladeRF and USRP
 
-(It has gone too far away from the Evrytania/LTE-Cell-Scanner during the period I had less experience. I won't push this ugly work back. :))
+(It has gone too far away from the Evrytania/LTE-Cell-Scanner since the time I had less FOSS experience, so let's keep my ugly work here and not ruine the original.)
 
 ## Build
 ```
