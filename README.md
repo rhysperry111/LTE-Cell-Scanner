@@ -4,7 +4,8 @@
 - OpenCL accelerated
 - Full Receiver algorithm for LTE 100 RB downlink (Matlab and GNU Octave scripts)
   - from IQ sample to PDSCH output and RRC SIB messages
-- Support HackRF, rtlsdr, BladeRF and USRP
+- Support HackRF, rtlsdr, BladeRF
+- USRP: Only with Matlab and GNU Octave
 
 (It has gone too far away from the Evrytania/LTE-Cell-Scanner since the time I had less FOSS experience, so let's keep my ugly work here and not ruine the original.)
 
