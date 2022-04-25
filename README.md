@@ -10,6 +10,7 @@
 (It has gone too far away from the Evrytania/LTE-Cell-Scanner since the time I had less FOSS experience, so let's keep my ugly work here and not ruine the original.)
 
 ## Build
+You might need to install some [libs](prepare-lib.md) before build.
 ```
 mkdir build
 cd build
