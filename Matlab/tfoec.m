@@ -32,7 +32,7 @@ if nRB == 6
 elseif nRB == 100
     decimation_ratio = 1;
 else
-    disp('nRB must be 6 or 100!');
+    disp('tfoec: nRB must be 6 or 100!');
     return;
 end
 

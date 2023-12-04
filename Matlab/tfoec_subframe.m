@@ -27,10 +27,10 @@ nRB = peak.n_rb_dl;
 
 if nRB == 6
     decimation_ratio = 16;
-elseif nRB == 100
+elseif ismember(nRB, [25, 50, 75, 100])
     decimation_ratio = 1;
 else
-    disp('nRB must be 6 or 100!');
+    disp('tfoec_subframe: nRB must be 6 or 100!');
     return;
 end
 

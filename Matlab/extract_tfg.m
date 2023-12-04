@@ -34,11 +34,11 @@ freq_fine=peak.freq_fine;
 if nRB == 6
     conv_idx_ratio = 1;
     decimation_ratio = 16;
-elseif nRB == 100
+elseif ismember(nRB, [25, 50, 75, 100])
     conv_idx_ratio = 16;
     decimation_ratio = 1;
 else
-    disp('nRB must be 6 or 100!');
+    disp('extract_tfg: nRB must be 6 or 100!');
     return;
 end
 
